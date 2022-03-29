@@ -7,18 +7,17 @@ const formComponent = `
 `
 
 function loadEvent() {
-    //meghívjuk a root-it
     const rootElement = document.getElementById("root");
 
-    //beillesztjük a formComponentet
+    //beillesztjuk a formComponentet a rootba
     rootElement.insertAdjacentHTML("beforeend", formComponent);
 
-    //változóba mentjük a form-ot, majd egy submit eseményfigyelőt adunk hozzá
+    //valtozoba mentjuk a form-ot, majd egy submit esemenyfigyelot adunk hozza
     const formElement = document.getElementById("form");
     formElement.addEventListener("submit", e => {
         e.preventDefault();
 
-        //postázni akarom az adatokat, ehhez ez a doboz hozzá:
+        //postazni akarom az adatokat, ez a doboz hozza
         const formData = new FormData();
         formData.append("title", e.target.querySelector(`input[name="title"]`).value);
         formData.append("picture", e.target.querySelector(`input[name="picture"]`).files[0]);
