@@ -6,15 +6,20 @@ const app = express();
 
 const dataLocation = path.join(`${__dirname}/../frontend/data/`);
 
+// Igy sozlgaljuk ki az index.html-t
 function getFunction(request, response){
     response.sendFile(path.join(`${__dirname}/../frontend/index.html`));
 }
+app.get("/", getFunction);
 
+// Az alabbi sor kiszolgalja  a frontend/public konyvtarbol a fajlokat
 app.use(fileUpload());
 app.use("/pub", express.static(`${__dirname}/../frontend/public`));
+
+// Minden ami az upload folderben van, azt teszi ez a sor elerhetove. De csak a pontos url-t megadva eri el a bongeszo
 app.use("/upload", express.static(`${__dirname}/../frontend/upload`));
 
-app.get("/", getFunction);
+
 
 // If there is a data.json, read the data from the file, if not, use an empty Array
 let jsonData = [];
@@ -22,7 +27,7 @@ try {
     let data = fs.readFileSync(`${dataLocation}data.json`, error => {
         if (error) {
             console.log(error);
-        }
+        }``
     });
     jsonData = JSON.parse(data);
 } catch (error) {
